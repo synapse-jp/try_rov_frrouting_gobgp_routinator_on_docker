@@ -1,0 +1,63 @@
+services:
+  routinator:
+    image: nlnetlabs/routinator:v0.12.1
+    hostname: routinator
+    networks:
+      network-bgp:
+        ipv4_address: 10.0.0.2
+    ports:
+      - 9556:9556
+  gobgp:
+    build:
+      context: gobgp/docker
+    hostname: gobgp
+    networks:
+      network-bgp:
+        ipv4_address: 10.0.0.3
+    volumes:
+      - ./gobgp/gobgpd.conf:/gobgpd.conf
+      - ./gobgp/ribs/:/ribs/
+    command: /gobgpd -f /gobgpd.conf
+  frr1:
+    image: quay.io/frrouting/frr:9.0.0
+    hostname: frr1
+    cap_add:
+      - NET_ADMIN
+      - SYS_ADMIN
+    networks:
+      network-bgp:
+        ipv4_address: 10.0.0.4
+    volumes:
+      - ./frr/daemons:/etc/frr/daemons
+      - ./frr/frr1.conf:/etc/frr/frr.conf
+  frr2:
+    image: quay.io/frrouting/frr:9.0.0
+    hostname: frr2
+    cap_add:
+      - NET_ADMIN
+      - SYS_ADMIN
+    networks:
+      network-bgp:
+        ipv4_address: 10.0.0.5
+    volumes:
+      - ./frr/daemons:/etc/frr/daemons
+      - ./frr/frr2.conf:/etc/frr/frr.conf
+  frr3:
+    image: quay.io/frrouting/frr:9.0.0
+    hostname: frr3
+    cap_add:
+      - NET_ADMIN
+      - SYS_ADMIN
+    networks:
+      network-bgp:
+        ipv4_address: 10.0.0.6
+    volumes:
+      - ./frr/daemons:/etc/frr/daemons
+      - ./frr/frr3.conf:/etc/frr/frr.conf
+
+networks:
+  network-bgp:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.0.0.0/24
