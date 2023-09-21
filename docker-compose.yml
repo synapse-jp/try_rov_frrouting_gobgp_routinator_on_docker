@@ -19,7 +19,7 @@ services:
       - ./gobgp/ribs/:/ribs/
     command: /gobgpd -f /gobgpd.conf
   frr1:
-    image: quay.io/frrouting/frr:9.0.0
+    image: quay.io/frrouting/frr:9.0.1
     hostname: frr1
     cap_add:
       - NET_ADMIN
@@ -31,7 +31,7 @@ services:
       - ./frr/daemons:/etc/frr/daemons
       - ./frr/frr1.conf:/etc/frr/frr.conf
   frr2:
-    image: quay.io/frrouting/frr:9.0.0
+    image: quay.io/frrouting/frr:9.0.1
     hostname: frr2
     cap_add:
       - NET_ADMIN
@@ -43,7 +43,7 @@ services:
       - ./frr/daemons:/etc/frr/daemons
       - ./frr/frr2.conf:/etc/frr/frr.conf
   frr3:
-    image: quay.io/frrouting/frr:9.0.0
+    image: quay.io/frrouting/frr:9.0.1
     hostname: frr3
     cap_add:
       - NET_ADMIN

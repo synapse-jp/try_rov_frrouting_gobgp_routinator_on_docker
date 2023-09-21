@@ -15,7 +15,7 @@
   - ROAの取得、BGPルータとのRPKI-RTRにも対応
 - FRRouting
   - Quaggaから派生したオープンソースのルーティングプロトコルスイート
-  - 公式Dockerイメージの9.0.0を使用
+  - 公式Dockerイメージの9.0.1を使用
   - Routinator、[JPNAP ROAキャッシュ](https://www.mfeed.ad.jp/rpki/tech.html)、[BBIX ROAキャッシュ](https://www.bbix.net/rpki/tech/)から、RPKI-RTRにてVRP(Validate ROA Payload)を受信
   - GoBGPからフルルートを受信し、ROV(Route origin validation)を実施
 
